@@ -1,0 +1,22 @@
+body{
+    height: 100vh;
+}
+
+.login-container{
+    height: 100%;
+    background-color: #2f3e46;
+}
+p{
+    color: red;
+}
+#color-label{
+    color: #fff !important;
+}
+#resetButton{
+    background-color: #9b2226 !important ;
+    border-color:#9b2226 ;
+}
+#submitButton{
+    background-color: #003049 !important;
+    border-color: #003049;
+}
