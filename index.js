@@ -1,14 +1,15 @@
 const form = {
     formControl: document.querySelector(".register-form"),
     resetButton: document.querySelector("#resetButton"),
-    fullName: document.querySelector("#name"),
-    email: document.querySelector("#email"),
-    phone: document.querySelector("#phone"),
-    password: document.querySelector("#password"),
-    message: document.querySelector("#message"),
-    date: document.querySelector("#date"),
-    color: document.querySelector("#exampleColorInput"),
+    inputs:{},
     errormessage: document.querySelectorAll(".form-floating"),
+
+    formElement(){
+        const allInputs = document.querySelectorAll("input")
+        allInputs.forEach(element => {
+            this.inputs[element.id] = element.value
+        })
+    },
     errMessage(message,index){
         const err = document.createElement("p")
         err.textContent=message
@@ -25,33 +26,28 @@ const form = {
         const phone = /^(5|05)([0-9]{2})\s?([0-9]{3})\s?([0-9]{2})\s?([0-9]{2})$/
         const password = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$/
         
-        if(name.test(this.fullName.value) == false)
+        if(name.test(this.inputs.name) == false)
         {   
             this.errMessage("*Bu alan numerik değer içeremez",0)
         }
-        else if(phone.test(this.phone.value) == false){
-                this.errMessage("* Lütfen 05** *** ** ** formatında bir numara giriniz",1)
+        else if(phone.test(this.inputs.phone) == false){
+                this.errMessage("* Lütfen 0555 555 55 55 formatında bir numara giriniz",1)
         }
-        else if(email.test(this.email.value) == false){
+        else if(email.test(this.inputs.email) == false){
             this.errMessage("*Lütfen geçerli bir mail adresi giriniz",2)
         }
-        else if(password.test(this.password.value) == false){
+        else if(password.test(this.inputs.password) == false){
             this.errMessage("*Şifre en az bir tane sayı ve alfabetik karakter içermelidir",3)
         }
     
     },
     submitForm(){
+        console.log('sadasd')
         this.formControl.addEventListener("submit",(e) =>{
-            this.formValidate()
-            var data= {
-                name: this.fullName.value,
-                phone: this.phone.value,
-                mail: this.email.value,
-                password: this.password.value,
-                message: this.message.value,
-                date: this.date.value,
-                color: this.color.value
-            }
+
+            this.formElement()
+            this.formValidate() 
+            var data= this.inputs
             
             axios.post('http://localhost:3000/newUser',data).then(res => console.log(res)).catch(err => console.log(err))
             

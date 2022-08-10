@@ -8,6 +8,7 @@ body{
 }
 p{
     color: red;
+    font-size: 12px;
 }
 #color-label{
     color: #fff !important;
