@@ -5,6 +5,7 @@ const form = {
     errormessage: document.querySelectorAll(".form-floating"),
 
     formElement(){
+        
         const allInputs = document.querySelectorAll("input")
         allInputs.forEach(element => {
             this.inputs[element.id] = element.value
@@ -42,7 +43,6 @@ const form = {
     
     },
     submitForm(){
-        console.log('sadasd')
         this.formControl.addEventListener("submit",(e) =>{
 
             this.formElement()
